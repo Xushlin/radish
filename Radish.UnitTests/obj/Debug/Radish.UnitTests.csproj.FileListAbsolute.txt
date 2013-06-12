@@ -1,9 +1,0 @@
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\Radish.UnitTests.dll
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\Radish.UnitTests.pdb
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\nunit.framework.dll
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\Radish.pdb
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\nunit.framework.xml
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\obj\Debug\Radish.UnitTests.csprojResolveAssemblyReference.cache
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\obj\Debug\Radish.UnitTests.dll
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\obj\Debug\Radish.UnitTests.pdb
-C:\Users\zxgly_000\documents\visual studio 2012\Projects\Radish\Radish.UnitTests\bin\Debug\Radish.exe

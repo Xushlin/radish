@@ -6,3 +6,5 @@
 /Radish.ncrunchsolution
 
 /packages
+/Radish.UnitTests/bin
+/Radish.UnitTests/obj
