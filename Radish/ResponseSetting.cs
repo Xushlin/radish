@@ -4,13 +4,11 @@ namespace Radish
 {
     public class ResponseSetting
     {
-        private readonly IHttpResponse _response;
-        
+
         private readonly List<IResponseWriter> _writers;
 
-        public ResponseSetting(IHttpResponse response)
+        public ResponseSetting()
         {
-            _response = response;
             _writers = new List<IResponseWriter>();
         }
 

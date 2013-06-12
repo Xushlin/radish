@@ -8,8 +8,8 @@ namespace Radish.UnitTests
         public void MappingTest()
         {
             var server = new HttpServer();
-            server.When(request => request.Uri.Is("home/index"))
-                  .Then(response => response.File("c:\\test.html").Header("Accept", "text/html"));
+            server.When(request => request.Uri.Is("home/index"));
+//                  .Then(response => response.File("c:\\test.html").Header("Accept", "text/html"));
         }
     }
 }

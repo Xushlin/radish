@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C1A8978B-1629-4E6E-AB14-53FC1926802C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Radish</RootNamespace>
     <AssemblyName>Radish</AssemblyName>
@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -39,8 +42,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AbstractRequestMatcher.cs" />
+    <Compile Include="AndRequestMatcher.cs" />
+    <Compile Include="IResponseWriter.cs" />
+    <Compile Include="EqualRequestMatcher.cs" />
+    <Compile Include="HttpServer.cs" />
+    <Compile Include="IHttpRequest.cs" />
+    <Compile Include="IHttpResponse.cs" />
+    <Compile Include="IRequestExtractor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMatcherSetting.cs" />
+    <Compile Include="RequestSetting.cs" />
+    <Compile Include="Extractors\RequestUriExtractor.cs" />
+    <Compile Include="ResponseFileWriter.cs" />
+    <Compile Include="ResponseHeaderWriter.cs" />
+    <Compile Include="ResponseSetting.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

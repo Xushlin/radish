@@ -4,11 +4,12 @@ namespace Radish
 {
     public class EqualRequestMatcher : AbstractRequestMatcher
     {
-        private readonly object _expected;
+        private readonly IRequestExtractor _extractor;
+        private readonly string _expected;
 
-        public EqualRequestMatcher(IRequestExtractor extractor, object expected)
-            : base(extractor)
+        public EqualRequestMatcher(IRequestExtractor extractor, string expected)
         {
+            _extractor = extractor;
             _expected = expected;
         }
 
