@@ -1,6 +1,11 @@
 namespace Radish
 {
-    public abstract class AbstractRequestMatcher
+    public interface IRequestMatcher
+    {
+        bool IsMatch(IHttpRequest request);
+    }
+
+    public abstract class AbstractRequestMatcher : IRequestMatcher
     {
         public abstract bool IsMatch(IHttpRequest request);
 

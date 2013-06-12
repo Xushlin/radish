@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AbstractRequestMatcher.cs" />
     <Compile Include="AndRequestMatcher.cs" />
+    <Compile Include="HttpServerEngine.cs" />
     <Compile Include="IResponseWriter.cs" />
     <Compile Include="EqualRequestMatcher.cs" />
     <Compile Include="HttpServer.cs" />

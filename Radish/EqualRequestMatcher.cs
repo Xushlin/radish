@@ -16,7 +16,7 @@ namespace Radish
 
         public override bool IsMatch(IHttpRequest request)
         {
-            throw new NotImplementedException();
+            return _extractor.Extract(request).Equals(_expected);
         }
     }
 }
