@@ -4,17 +4,17 @@ namespace Radish
 {
     public class AndRequestMatcher : AbstractRequestMatcher
     {
-        private readonly AbstractRequestMatcher[] _matchers;
+        private readonly IRequestMatcher[] _matchers;
 
-        public AndRequestMatcher(params AbstractRequestMatcher[] matchers)
+        public AndRequestMatcher(params IRequestMatcher[] matchers)
         {
             _matchers = matchers;
         }
 
 
-        public override bool IsMatch(IHttpRequest request)
+        public override bool Match(IHttpRequest request)
         {
-            return _matchers.All(matcher => matcher.IsMatch(request));
+            return _matchers.All(matcher => matcher.Match(request));
         }
     }
 }

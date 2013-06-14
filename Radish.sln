@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radish", "Radish\Radish.csproj", "{C1A8978B-1629-4E6E-AB14-53FC1926802C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radish.UnitTests", "Radish.UnitTests\Radish.UnitTests.csproj", "{4CCF69C6-38C5-4A58-80AE-3882812EF75F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radish.UnitTests", "Radish.UnitTests\Radish.UnitTests.csproj", "{804BD31B-C303-4AEA-A5F4-0063091F434E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{C1A8978B-1629-4E6E-AB14-53FC1926802C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A8978B-1629-4E6E-AB14-53FC1926802C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A8978B-1629-4E6E-AB14-53FC1926802C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CCF69C6-38C5-4A58-80AE-3882812EF75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CCF69C6-38C5-4A58-80AE-3882812EF75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CCF69C6-38C5-4A58-80AE-3882812EF75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CCF69C6-38C5-4A58-80AE-3882812EF75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{804BD31B-C303-4AEA-A5F4-0063091F434E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804BD31B-C303-4AEA-A5F4-0063091F434E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804BD31B-C303-4AEA-A5F4-0063091F434E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804BD31B-C303-4AEA-A5F4-0063091F434E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

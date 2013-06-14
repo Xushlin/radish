@@ -5,12 +5,15 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C1A8978B-1629-4E6E-AB14-53FC1926802C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Radish</RootNamespace>
     <AssemblyName>Radish</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,24 +46,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractRequestMatcher.cs" />
+    <Compile Include="Adapters\HttpListenerContextAdapter.cs" />
+    <Compile Include="Adapters\HttpListenerRequestAdapter.cs" />
+    <Compile Include="Adapters\HttpListenerResponseAdapter.cs" />
     <Compile Include="AndRequestMatcher.cs" />
+    <Compile Include="ContentResponse.cs" />
+    <Compile Include="Extractors\HttpMethodRequestExtractor.cs" />
+    <Compile Include="Helpers\ArrayHelper.cs" />
+    <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Http.cs" />
     <Compile Include="HttpServerEngine.cs" />
+    <Compile Include="IHttpContext.cs" />
+    <Compile Include="IHttpHandler.cs" />
+    <Compile Include="IResource.cs" />
     <Compile Include="IResponseWriter.cs" />
     <Compile Include="EqualRequestMatcher.cs" />
     <Compile Include="HttpServer.cs" />
     <Compile Include="IHttpRequest.cs" />
-    <Compile Include="IHttpResponse.cs" />
     <Compile Include="IRequestExtractor.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Matchers\AndRequestMatcher.cs" />
+    <Compile Include="Matchers\AnyRequestMatcher.cs" />
+    <Compile Include="Matchers\EqualRequestMatcher.cs" />
+    <Compile Include="Matchers\ExpressionRequestMatcher.cs" />
+    <Compile Include="Matchers\HttpMethodRequestMatcher.cs" />
+    <Compile Include="Matchers\OrRequestMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestMatcherSetting.cs" />
     <Compile Include="RequestSetting.cs" />
-    <Compile Include="Extractors\RequestUriExtractor.cs" />
+    <Compile Include="Extractors\UriRequestExtractor.cs" />
     <Compile Include="ResponseFileWriter.cs" />
     <Compile Include="ResponseHeaderWriter.cs" />
     <Compile Include="ResponseSetting.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,21 +1,31 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
+using Radish.Adapters;
 
 namespace Radish
 {
     public class HttpServerEngine : IDisposable
     {
+        private readonly HttpServer _setting;
+        private readonly int _port;
         private readonly HttpListener _listener;
         private readonly Thread _listenerThread;
         private readonly Thread[] _workers;
         private readonly ManualResetEvent _stop, _ready;
         private readonly Queue<HttpListenerContext> _queue;
 
-        public HttpServerEngine(int maxThreads)
+        public HttpServerEngine(HttpServer setting, int port)
+            : this(setting, port, 1)
         {
-            _workers = new Thread[maxThreads];
+        }
+
+        public HttpServerEngine(HttpServer setting, int port, int maxThread)
+        {
+            _setting = setting;
+            _port = port;
+            _workers = new Thread[maxThread];
             _queue = new Queue<HttpListenerContext>();
             _stop = new ManualResetEvent(false);
             _ready = new ManualResetEvent(false);
@@ -23,9 +33,16 @@ namespace Radish
             _listenerThread = new Thread(HandleRequests);
         }
 
-        public void Start(int port)
+        void ProcessRequest(HttpListenerContext httpListenerContext)
         {
-            _listener.Prefixes.Add(String.Format(@"http://+:{0}/", port));
+            IHttpContext context = new HttpListenerContextAdapter(httpListenerContext);
+            _setting.Proccess(context);
+        }
+
+        public HttpServerEngine Start()
+        {
+            _listener.Prefixes.Add(String.Format(@"http://+:{0}/", _port));
+
             _listener.Start();
             _listenerThread.Start();
 
@@ -34,10 +51,13 @@ namespace Radish
                 _workers[i] = new Thread(Worker);
                 _workers[i].Start();
             }
+            return this;
         }
 
         public void Dispose()
-        { Stop(); }
+        {
+            Stop();
+        }
 
         public void Stop()
         {
@@ -89,11 +109,13 @@ namespace Radish
                     }
                 }
 
-                try { ProcessRequest(context); }
+                try
+                {
+                    ProcessRequest(context);
+                }
                 catch (Exception e) { Console.Error.WriteLine(e); }
             }
         }
 
-        public event Action<HttpListenerContext> ProcessRequest;
     }
 }

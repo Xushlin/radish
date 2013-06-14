@@ -7,25 +7,36 @@ namespace Radish
     public class Setting
     {
         public IRequestMatcher RequestMatcher { get; set; }
-        public ResponseSetting ResponseSetting { get; set; }
+        public ResponseHandler ResponseHandler { get; set; }
+
+        public bool Match(IHttpRequest request)
+        {
+            return RequestMatcher.Match((request));
+        }
+
+        public void Handle(IHttpContext context)
+        {
+            ResponseHandler.Handle(context);
+        }
     }
 
     public class HttpHandlerSetting
     {
         protected List<Setting> _settings;
 
-        public void Then(Action<ResponseSetting> responseAction)
+        public void Then(Action<ResponseHandler> responseAction)
         {
             var lastSetting = _settings.Last();
-            if (lastSetting.ResponseSetting != null)
+            if (lastSetting.ResponseHandler != null)
                 throw new InvalidOperationException("Please set request matcher first!");
-            lastSetting.ResponseSetting = new ResponseSetting();
-            responseAction(lastSetting.ResponseSetting);
+            lastSetting.ResponseHandler = new ResponseHandler();
+            responseAction(lastSetting.ResponseHandler);
         }
     }
 
     public class HttpServer : HttpHandlerSetting
     {
+
         public HttpServer()
         {
             _settings = new List<Setting>();
@@ -38,6 +49,19 @@ namespace Radish
             _settings.Add(setting);
 
             return this;
+        }
+
+        internal void Proccess(IHttpContext context)
+        {
+            foreach (var setting in _settings)
+            {
+                if (setting.Match(context.Request))
+                {
+                    setting.Handle(context);
+                    context.Response.OutputStream.Close();
+                    return;
+                }
+            }
         }
     }
 }
