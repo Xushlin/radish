@@ -5,7 +5,7 @@ namespace Radish.Matchers
 {
     public class OrRequestMatcher : AbstractRequestMatcher
     {
-        private IEnumerable<IRequestMatcher> _matchers;
+        private readonly IEnumerable<IRequestMatcher> _matchers;
 
         public OrRequestMatcher(params IRequestMatcher[] matchers)
             : this((IEnumerable<IRequestMatcher>)matchers)

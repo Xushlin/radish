@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Radish
 {
-    public class Setting
+    public class HttpHandler
     {
         public IRequestMatcher RequestMatcher { get; set; }
         public ResponseSetting ResponseSetting { get; set; }
@@ -25,7 +25,7 @@ namespace Radish
 
     public class HttpHandlerSetting
     {
-        protected List<Setting> _settings;
+        protected List<HttpHandler> _settings;
 
         public void Then(Action<ResponseSetting> responseAction)
         {
@@ -39,19 +39,19 @@ namespace Radish
 
     public class HttpServer : HttpHandlerSetting
     {
-        private readonly ResponseSetting _pageNotFoundSetting;
+        private readonly HttpHandler _pageNotFoundHandler;
 
         public HttpServer()
         {
-            _pageNotFoundSetting = new ResponseSetting().Status(404);
-            _settings = new List<Setting>();
+            _pageNotFoundHandler = new HttpHandler { ResponseSetting = new ResponseSetting().Status(404) };
+            _settings = new List<HttpHandler>();
         }
 
         public HttpHandlerSetting When(Func<RequestSetting, IRequestMatcher> requestMatcherExpression)
         {
-            var setting = new Setting();
-            setting.RequestMatcher = requestMatcherExpression(new RequestSetting());
-            _settings.Add(setting);
+            var handler = new HttpHandler();
+            handler.RequestMatcher = requestMatcherExpression(new RequestSetting());
+            _settings.Add(handler);
 
             return this;
         }
@@ -67,7 +67,7 @@ namespace Radish
                     return;
                 }
             }
-
+            _pageNotFoundHandler.Handle(context);
         }
     }
 }
