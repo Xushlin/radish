@@ -24,7 +24,7 @@ namespace Radish
 
         public ResponseHandler Header(string name, string value)
         {
-            _writers.Add(new ResponseHeaderWriter(name, value));
+            _writers.Add(new HeaderResponseWriter(name, value));
             return this;
         }
 
@@ -42,9 +42,10 @@ namespace Radish
             return this;
         }
 
-        public void Status(int statusCode)
+        public ResponseHandler Status(int statusCode)
         {
-            throw new NotImplementedException();
+            _writers.Add(new StatusCodeResponseWriter(statusCode));
+            return this;
         }
     }
 }

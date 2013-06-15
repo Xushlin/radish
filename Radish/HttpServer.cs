@@ -40,8 +40,7 @@ namespace Radish
 
         public HttpServer()
         {
-            _pageNotFoundHandler = new ResponseHandler();
-
+            _pageNotFoundHandler = new ResponseHandler().Status(404);
             _settings = new List<Setting>();
         }
 

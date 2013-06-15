@@ -76,7 +76,6 @@
     <Compile Include="Writers\CookieResponseWriter.cs" />
     <Compile Include="Writers\HeaderResponseWriter.cs" />
     <Compile Include="Writers\FileResponseWriter.cs" />
-    <Compile Include="ResponseHeaderWriter.cs" />
     <Compile Include="ResponseSetting.cs" />
     <Compile Include="Writers\StatusCodeResponseWriter.cs" />
     <Compile Include="Writers\TextResponseWriter.cs" />

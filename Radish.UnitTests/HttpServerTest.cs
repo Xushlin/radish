@@ -20,7 +20,7 @@ namespace Radish.UnitTests
         public void Run()
         {
             // Arrange
-            HttpServer server = new HttpServer();
+            var server = new HttpServer();
             server.When(request => request.Uri.Is("/home/index"))
                   .Then(response => response.Text("foo"));
 
