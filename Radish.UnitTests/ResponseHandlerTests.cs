@@ -1,5 +1,7 @@
-﻿using NSubstitute;
+﻿using System.Linq;
+using FluentAssertions;
 using NUnit.Framework;
+using Radish.Writers;
 
 namespace Radish.UnitTests
 {
@@ -9,16 +11,14 @@ namespace Radish.UnitTests
         public void Header_should_append_a_HeaderResponseWriter()
         {
             // Arrange
-            var handler = new ResponseHandler();
-            var httpContext = Substitute.For<IHttpContext>();
-    
+            var setting = new ResponseSetting();
 
             // Act
-            handler.Header("Content-Type", "text/xml");
-            handler.Handle(httpContext);
+            setting.Header("Content-Type", "text/xml");
 
             // Assert
-            httpContext.Response.Received().AppendHeader("Content-Type", "text/xml");
+            setting.Writers.First().Should().BeOfType<HeaderResponseWriter>();
+            setting.Writers.Count().Should().Be(1);
         }
     }
 }

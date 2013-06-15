@@ -7,7 +7,7 @@ namespace Radish
     public class Setting
     {
         public IRequestMatcher RequestMatcher { get; set; }
-        public ResponseHandler ResponseHandler { get; set; }
+        public ResponseSetting ResponseSetting { get; set; }
 
         public bool Match(IHttpRequest request)
         {
@@ -16,7 +16,10 @@ namespace Radish
 
         public void Handle(IHttpContext context)
         {
-            ResponseHandler.Handle(context);
+            foreach (var responseWriter in ResponseSetting.Writers)
+            {
+                responseWriter.Write(context.Response);
+            }
         }
     }
 
@@ -24,23 +27,23 @@ namespace Radish
     {
         protected List<Setting> _settings;
 
-        public void Then(Action<ResponseHandler> responseAction)
+        public void Then(Action<ResponseSetting> responseAction)
         {
             var lastSetting = _settings.Last();
-            if (lastSetting.ResponseHandler != null)
+            if (lastSetting.ResponseSetting != null)
                 throw new InvalidOperationException("Please set request matcher first!");
-            lastSetting.ResponseHandler = new ResponseHandler();
-            responseAction(lastSetting.ResponseHandler);
+            lastSetting.ResponseSetting = new ResponseSetting();
+            responseAction(lastSetting.ResponseSetting);
         }
     }
 
     public class HttpServer : HttpHandlerSetting
     {
-        private readonly ResponseHandler _pageNotFoundHandler;
+        private readonly ResponseSetting _pageNotFoundSetting;
 
         public HttpServer()
         {
-            _pageNotFoundHandler = new ResponseHandler().Status(404);
+            _pageNotFoundSetting = new ResponseSetting().Status(404);
             _settings = new List<Setting>();
         }
 
