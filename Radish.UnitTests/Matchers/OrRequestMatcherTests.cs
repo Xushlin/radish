@@ -17,13 +17,13 @@ namespace Radish.UnitTests.Matchers
             var matcher2 = Substitute.For<IRequestMatcher>();
             matcher2.Match(null).ReturnsForAnyArgs(false);
 
-            var andRequestMatcher = new OrRequestMatcher(new[] { matcher1, matcher2 });
+            var andRequestMatcher = new OrRequestMatcher(matcher1, matcher2 );
 
             // Act
             var result = andRequestMatcher.Match(null);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
 
@@ -37,53 +37,13 @@ namespace Radish.UnitTests.Matchers
             var matcher2 = Substitute.For<IRequestMatcher>();
             matcher2.Match(null).ReturnsForAnyArgs(false);
 
-            var andRequestMatcher = new OrRequestMatcher(new[] { matcher1, matcher2 });
+            var andRequestMatcher = new OrRequestMatcher( matcher1, matcher2 );
 
             // Act
             var result = andRequestMatcher.Match(null);
 
             // Assert
-            Assert.True(result);
-        }
-
-        [Test]
-        public void OperatorOr_when_left_is_OrRequestMatcher_should_append_matcher_to_the_OrRequestMatcher()
-        {
-            // Assert
-            var matcher1 = Substitute.For<AbstractRequestMatcher>();
-            matcher1.Match(null).ReturnsForAnyArgs(true);
-
-            var matcher2 = Substitute.For<IRequestMatcher>();
-            matcher2.Match(null).ReturnsForAnyArgs(false);
-
-            var orRequestMatcher = new OrRequestMatcher(new[] { matcher2 });
-
-            // Act
-            var result = matcher1 | orRequestMatcher;
-
-            // Asesrt
-            result.Should().Be(orRequestMatcher);
-            result.Match(null).Should().BeTrue();
-        }
-
-        [Test]
-        public void OperatorOr_when_right_is_OrRequestMatcher_should_append_matcher_to_the_OrRequestMatcher()
-        {
-            // Assert
-            var matcher1 = Substitute.For<AbstractRequestMatcher>();
-            matcher1.Match(null).ReturnsForAnyArgs(true);
-
-            var matcher2 = Substitute.For<IRequestMatcher>();
-            matcher2.Match(null).ReturnsForAnyArgs(false);
-
-            var orRequestMatcher = new OrRequestMatcher(new[] { matcher2 });
-
-            // Act
-            var result = orRequestMatcher | matcher1;
-
-            // Asesrt
-            result.Should().Be(orRequestMatcher);
-            result.Match(null).Should().BeTrue();
+            result.Should().BeTrue();
         }
     }
 }

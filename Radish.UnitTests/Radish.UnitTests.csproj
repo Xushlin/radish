@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingTest.cs" />
     <Compile Include="UrlTest.cs" />
+    <Compile Include="Writers\CookieResponseWriterTests.cs" />
     <Compile Include="Writers\HeaderResponseWriterTests.cs" />
     <Compile Include="Writers\ResponseFileWriterTests.cs" />
     <Compile Include="Writers\StatusCodeResponseWriterTests.cs" />

@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace Radish.Matchers
 {
-    public class AndRequestMatcher : IRequestMatcher
+    public class AndRequestMatcher : AbstractRequestMatcher
     {
         private readonly IEnumerable<IRequestMatcher> _matchers;
 
-        public AndRequestMatcher(IEnumerable<IRequestMatcher> matchers)
+        public AndRequestMatcher(params IRequestMatcher[] matchers)
         {
             _matchers = matchers;
         }
 
-        public bool Match(IHttpRequest request)
+        public override bool Match(IHttpRequest request)
         {
             return _matchers.All(x => x.Match(request));
         }

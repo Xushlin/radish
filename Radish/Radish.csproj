@@ -49,7 +49,6 @@
     <Compile Include="Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Adapters\HttpListenerRequestAdapter.cs" />
     <Compile Include="Adapters\HttpListenerResponseAdapter.cs" />
-    <Compile Include="AndRequestMatcher.cs" />
     <Compile Include="ContentResponse.cs" />
     <Compile Include="Extractors\HttpMethodRequestExtractor.cs" />
     <Compile Include="Helpers\ArrayHelper.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="RequestMatcherSetting.cs" />
     <Compile Include="RequestSetting.cs" />
     <Compile Include="Extractors\UriRequestExtractor.cs" />
+    <Compile Include="Writers\CookieResponseWriter.cs" />
     <Compile Include="Writers\HeaderResponseWriter.cs" />
     <Compile Include="Writers\FileResponseWriter.cs" />
     <Compile Include="ResponseHeaderWriter.cs" />

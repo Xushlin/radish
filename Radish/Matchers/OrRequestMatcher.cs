@@ -21,10 +21,5 @@ namespace Radish.Matchers
         {
             return _matchers.Any(x => x.Match(request));
         }
-
-        internal void AppendMatcher(AbstractRequestMatcher matcher)
-        {
-            _matchers = _matchers.Union(new[] { matcher });
-        }
     }
 }

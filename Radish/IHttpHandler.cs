@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace Radish
+﻿namespace Radish
 {
     public interface IHttpHandler
     {

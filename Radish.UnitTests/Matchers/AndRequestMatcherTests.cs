@@ -1,5 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
+using Radish.Matchers;
 
 namespace Radish.UnitTests.Matchers
 {

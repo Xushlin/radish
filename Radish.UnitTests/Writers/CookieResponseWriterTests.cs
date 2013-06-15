@@ -5,14 +5,14 @@ using Radish.Writers;
 
 namespace Radish.UnitTests.Writers
 {
-    public class HeaderResponseWriterTests
+    public class CookieResponseWriterTests
     {
         [Test]
-        public void Write()
+        public void Writer()
         {
             // Arrange
             var headers = new WebHeaderCollection();
-            var writer = new HeaderResponseWriter("Content-Type", "text/xml");
+            var writer = new CookieResponseWriter("cookie-name", "cookie-value");
             var response = Substitute.For<IHttpResponse>();
             response.Headers.Returns(headers);
 
@@ -20,7 +20,7 @@ namespace Radish.UnitTests.Writers
             writer.Write(response);
 
             // Assert
-            response.Received().AppendHeader("Content-Type","text/xml");
+            response.Received().AppendCookie(new Cookie("cookie-name", "cookie-value"));
         }
     }
 }
