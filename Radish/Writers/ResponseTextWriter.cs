@@ -1,23 +1,7 @@
-using System;
 using System.Text;
 
-namespace Radish
+namespace Radish.Writers
 {
-    public class ResponseFileWriter : IResponseWriter
-    {
-        private readonly string _file;
-
-        public ResponseFileWriter(string file)
-        {
-            _file = file;
-        }
-
-        public void Write(IHttpResponse response)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class ResponseTextWriter : IResponseWriter
     {
         private readonly string _text;

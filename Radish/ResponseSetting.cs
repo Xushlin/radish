@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Radish.Writers;
 
 namespace Radish
 {
@@ -16,7 +18,7 @@ namespace Radish
 
         public ResponseHandler File(string file)
         {
-            _writers.Add(new ResponseFileWriter(file));
+            _writers.Add(new FileResponseWriter(file));
             return this;
         }
 
@@ -38,6 +40,11 @@ namespace Radish
         {
             _writers.Add(new ResponseTextWriter(text, Encoding.UTF8));
             return this;
+        }
+
+        public void Status(int statusCode)
+        {
+            throw new NotImplementedException();
         }
     }
 }

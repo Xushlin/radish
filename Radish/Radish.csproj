@@ -74,9 +74,11 @@
     <Compile Include="RequestMatcherSetting.cs" />
     <Compile Include="RequestSetting.cs" />
     <Compile Include="Extractors\UriRequestExtractor.cs" />
-    <Compile Include="ResponseFileWriter.cs" />
+    <Compile Include="Writers\FileResponseWriter.cs" />
     <Compile Include="ResponseHeaderWriter.cs" />
     <Compile Include="ResponseSetting.cs" />
+    <Compile Include="Writers\ResponseStatusCodeWriter.cs" />
+    <Compile Include="Writers\ResponseTextWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

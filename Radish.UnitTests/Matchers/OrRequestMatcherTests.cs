@@ -47,7 +47,7 @@ namespace Radish.UnitTests.Matchers
         }
 
         [Test]
-        public void OperatorOr_when_left_is_OrRequestMatcher_should_not_append_matcher_to_left()
+        public void OperatorOr_when_left_is_OrRequestMatcher_should_append_matcher_to_the_OrRequestMatcher()
         {
             // Assert
             var matcher1 = Substitute.For<AbstractRequestMatcher>();
@@ -67,7 +67,7 @@ namespace Radish.UnitTests.Matchers
         }
 
         [Test]
-        public void OperatorOr_when_right_is_OrRequestMatcher_should_not_append_matcher_to_right()
+        public void OperatorOr_when_right_is_OrRequestMatcher_should_append_matcher_to_the_OrRequestMatcher()
         {
             // Assert
             var matcher1 = Substitute.For<AbstractRequestMatcher>();

@@ -36,9 +36,12 @@ namespace Radish
 
     public class HttpServer : HttpHandlerSetting
     {
+        private readonly ResponseHandler _pageNotFoundHandler;
 
         public HttpServer()
         {
+            _pageNotFoundHandler = new ResponseHandler();
+
             _settings = new List<Setting>();
         }
 
@@ -62,6 +65,7 @@ namespace Radish
                     return;
                 }
             }
+
         }
     }
 }

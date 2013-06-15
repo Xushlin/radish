@@ -86,7 +86,6 @@ namespace Radish
             catch (WebException exc)
             {
                 response = (HttpWebResponse)exc.Response;
-
             }
             if (response != null)
             {
