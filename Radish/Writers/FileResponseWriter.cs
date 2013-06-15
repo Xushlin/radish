@@ -14,15 +14,8 @@ namespace Radish.Writers
 
         public void Write(IHttpResponse response)
         {
-            using (var stream = File.Open(_file, FileMode.Open))
-            {
-                var data = (byte)stream.ReadByte();
-                while (data != -1)
-                {
-                    response.OutputStream.WriteByte(data);
-                    data = (byte)stream.ReadByte();
-                }
-            }
+            byte[] content = File.ReadAllBytes(_file);
+            response.OutputStream.Write(content, 0, content.Length);
         }
     }
 }
