@@ -64,7 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingTest.cs" />
     <Compile Include="UrlTest.cs" />
+    <Compile Include="Writers\HeaderResponseWriterTests.cs" />
     <Compile Include="Writers\ResponseFileWriterTests.cs" />
+    <Compile Include="Writers\StatusCodeResponseWriterTests.cs" />
+    <Compile Include="Writers\TextReponseWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -2,13 +2,13 @@ using System.Text;
 
 namespace Radish.Writers
 {
-    public class ResponseTextWriter : IResponseWriter
+    public class TextResponseWriter : IResponseWriter
     {
         private readonly string _text;
         private readonly Encoding _encoding;
 
 
-        public ResponseTextWriter(string text, Encoding encoding)
+        public TextResponseWriter(string text, Encoding encoding)
         {
             _text = text;
             _encoding = encoding;

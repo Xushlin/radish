@@ -38,7 +38,7 @@ namespace Radish
 
         public ResponseHandler Text(string text)
         {
-            _writers.Add(new ResponseTextWriter(text, Encoding.UTF8));
+            _writers.Add(new TextResponseWriter(text, Encoding.UTF8));
             return this;
         }
 
