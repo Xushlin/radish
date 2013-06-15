@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using Radish.Matchers;
 
@@ -43,6 +44,46 @@ namespace Radish.UnitTests.Matchers
 
             // Assert
             Assert.True(result);
+        }
+
+        [Test]
+        public void OperatorOr_when_left_is_OrRequestMatcher_should_not_append_matcher_to_left()
+        {
+            // Assert
+            var matcher1 = Substitute.For<AbstractRequestMatcher>();
+            matcher1.Match(null).ReturnsForAnyArgs(true);
+
+            var matcher2 = Substitute.For<IRequestMatcher>();
+            matcher2.Match(null).ReturnsForAnyArgs(false);
+
+            var orRequestMatcher = new OrRequestMatcher(new[] { matcher2 });
+
+            // Act
+            var result = matcher1 | orRequestMatcher;
+
+            // Asesrt
+            result.Should().Be(orRequestMatcher);
+            result.Match(null).Should().BeTrue();
+        }
+
+        [Test]
+        public void OperatorOr_when_right_is_OrRequestMatcher_should_not_append_matcher_to_right()
+        {
+            // Assert
+            var matcher1 = Substitute.For<AbstractRequestMatcher>();
+            matcher1.Match(null).ReturnsForAnyArgs(true);
+
+            var matcher2 = Substitute.For<IRequestMatcher>();
+            matcher2.Match(null).ReturnsForAnyArgs(false);
+
+            var orRequestMatcher = new OrRequestMatcher(new[] { matcher2 });
+
+            // Act
+            var result = orRequestMatcher | matcher1;
+
+            // Asesrt
+            result.Should().Be(orRequestMatcher);
+            result.Match(null).Should().BeTrue();
         }
     }
 }

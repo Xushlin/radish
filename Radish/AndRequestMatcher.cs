@@ -11,7 +11,6 @@ namespace Radish
             _matchers = matchers;
         }
 
-
         public override bool Match(IHttpRequest request)
         {
             return _matchers.All(matcher => matcher.Match(request));

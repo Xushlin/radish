@@ -1,10 +1,11 @@
-/Radish/obj
-/Radish/bin
+*/obj
+*/bin
 /_ReSharper.Radish
 
 /Radish.ncrunchsolution.user
 /Radish.ncrunchsolution
 
 /packages
-/Radish.UnitTests/bin
+
 /Radish.UnitTests/obj
+/_NCrunch_Radish
