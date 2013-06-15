@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Text;
 
@@ -16,7 +15,7 @@ namespace Radish
         public static object Put(string url, string data)
         {
             HttpWebResponse response;
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             string result = null;
             try
             {
@@ -30,7 +29,7 @@ namespace Radish
                 request.ContentLength = arr.Length;
 
                 request.Accept = "text/json";
-                request.ProtocolVersion = System.Net.HttpVersion.Version11;
+                request.ProtocolVersion = HttpVersion.Version11;
                 Stream dataStream = request.GetRequestStream();
                 dataStream.Write(arr, 0, arr.Length);
                 dataStream.Close();
@@ -44,14 +43,8 @@ namespace Radish
             if (response != null)
             {
                 // we will read data via the response stream
-                Stream resStream = response.GetResponseStream();
-
-                Encoding encoding = string.IsNullOrEmpty(response.CharacterSet) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
-
-                StreamReader streamReader = new StreamReader(
-                                              resStream,
-                                              encoding
-                                            );
+                var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
+                var streamReader = new StreamReader(response.GetResponseStream(), encoding);
                 result = streamReader.ReadToEnd();
             }
 
@@ -62,7 +55,7 @@ namespace Radish
         public static object Post(string url, string data)
         {
             HttpWebResponse response;
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             string result = null;
             try
             {
@@ -76,7 +69,7 @@ namespace Radish
                 request.ContentLength = arr.Length;
                 request.KeepAlive = true;
                 request.Accept = "text/html";
-                request.ProtocolVersion = System.Net.HttpVersion.Version11;
+                request.ProtocolVersion = HttpVersion.Version11;
                 Stream dataStream = request.GetRequestStream();
                 dataStream.Write(arr, 0, arr.Length);
                 dataStream.Close();
@@ -90,11 +83,8 @@ namespace Radish
             if (response != null)
             {
                 // we will read data via the response stream
-                Stream resStream = response.GetResponseStream();
-                StreamReader streamReader = new StreamReader(
-                                              resStream,
-                                              Encoding.GetEncoding(response.CharacterSet)
-                                            );
+                var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
+                var streamReader = new StreamReader(response.GetResponseStream(), encoding);
                 result = streamReader.ReadToEnd();
             }
 
@@ -116,7 +106,7 @@ namespace Radish
     public class TextResult : ResponseResult
     {
         private readonly HttpWebResponse _response;
-        private string content;
+        private string _content;
         public TextResult(HttpWebResponse response)
         {
             _response = response;
@@ -124,20 +114,20 @@ namespace Radish
 
         public override string GetContent()
         {
-            if (content == null)
+            if (_content == null)
             {
                 ReadContent();
             }
-            return content;
+            return _content;
         }
 
         private void ReadContent()
         {
             Encoding encoding = string.IsNullOrEmpty(_response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(_response.ContentEncoding);
 
-            using (StreamReader reader = new StreamReader(_response.GetResponseStream(), encoding))
+            using (var reader = new StreamReader(_response.GetResponseStream(), encoding))
             {
-                content = reader.ReadToEnd();
+                _content = reader.ReadToEnd();
             }
         }
     }
@@ -176,7 +166,6 @@ namespace Radish
     {
         private readonly string _text;
 
-
         public TextContent(string text)
         {
             _text = text;
@@ -186,12 +175,5 @@ namespace Radish
         {
             return Encoding.UTF8.GetBytes(_text);
         }
-    }
-
-
-
-    public class HttpRequest
-    {
-
     }
 }
