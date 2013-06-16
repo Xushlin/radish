@@ -50,7 +50,8 @@
     <Compile Include="Adapters\HttpListenerRequestAdapter.cs" />
     <Compile Include="Adapters\HttpListenerResponseAdapter.cs" />
     <Compile Include="ContentResponse.cs" />
-    <Compile Include="Extractors\HttpMethodRequestExtractor.cs" />
+    <Compile Include="RequestExtractors\QueryStringExtractor.cs" />
+    <Compile Include="RequestExtractors\HttpMethodExtractor.cs" />
     <Compile Include="Helpers\ArrayHelper.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Http.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestMatcherSetting.cs" />
     <Compile Include="RequestSetting.cs" />
-    <Compile Include="Extractors\UriRequestExtractor.cs" />
+    <Compile Include="RequestExtractors\UriExtractor.cs" />
     <Compile Include="Writers\CookieResponseWriter.cs" />
     <Compile Include="Writers\HeaderResponseWriter.cs" />
     <Compile Include="Writers\FileResponseWriter.cs" />

@@ -1,4 +1,4 @@
-using Radish.Extractors;
+using Radish.RequestExtractors;
 
 namespace Radish
 {
@@ -8,7 +8,7 @@ namespace Radish
         {
             get
             {
-                extractor = new UriRequestExtractor();
+                extractor = new UriExtractor();
                 return this;
             }
         }
@@ -17,7 +17,7 @@ namespace Radish
         {
             get
             {
-                extractor = new HttpMethodRequestExtractor();
+                extractor = new HttpMethodExtractor();
                 return this;
             }
         }

@@ -50,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extractors\UriRequestExtractorTests.cs" />
+    <Compile Include="RequestExtractors\HttpMethodExtractorTests.cs" />
+    <Compile Include="RequestExtractors\QueryStringExtractorTests.cs" />
+    <Compile Include="RequestExtractors\UriExtractorTests.cs" />
     <Compile Include="Helpers\ArrayHelperTest.cs" />
     <Compile Include="RequestExtractorTest.cs" />
     <Compile Include="Matchers\AndRequestMatcherTests.cs" />
