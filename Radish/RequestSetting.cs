@@ -8,7 +8,7 @@ namespace Radish
         {
             get
             {
-                _extractor = new UriRequestExtractor();
+                extractor = new UriRequestExtractor();
                 return this;
             }
         }
@@ -17,7 +17,7 @@ namespace Radish
         {
             get
             {
-                _extractor = new HttpMethodRequestExtractor();
+                extractor = new HttpMethodRequestExtractor();
                 return this;
             }
         }

@@ -1,24 +1,20 @@
-using Radish.Extensions;
-using Radish.Helpers;
-
 namespace Radish.Matchers
 {
-    public class EqualRequestMatcher : IRequestMatcher
+    public class EqualRequestMatcher : AbstractRequestMatcher
     {
         private readonly IRequestExtractor _extractor;
-        private readonly IResource _resource;
+        private readonly string _expected;
 
-        public EqualRequestMatcher(IRequestExtractor extractor, IResource resource)
+        public EqualRequestMatcher(IRequestExtractor extractor, string expected)
         {
             _extractor = extractor;
-            _resource = resource;
+            _expected = expected;
         }
 
-        public bool Match(IHttpRequest request)
+        public override bool Match(IHttpRequest request)
         {
             var content = _extractor.Extract(request);
-
-            return content != null && ArrayHelper.Equals(content.ToByteArray(), _resource.ToByteArray());
+            return content != null && content.Equals(_expected);
         }
     }
 }

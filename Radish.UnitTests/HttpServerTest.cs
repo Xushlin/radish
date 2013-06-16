@@ -23,7 +23,6 @@ namespace Radish.UnitTests
             var server = new HttpServer();
             server.When(request => request.Uri.Is("/home/index"))
                   .Then(response => response.Text("foo"));
-
             var engine = new HttpServerEngine(server,9000).Start();
 
             // Act

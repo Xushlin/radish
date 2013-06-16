@@ -63,7 +63,7 @@ namespace Radish
         {
             _stop.Set();
             _listenerThread.Join();
-            foreach (Thread worker in _workers)
+            foreach (var worker in _workers)
                 worker.Join();
             _listener.Stop();
         }
@@ -89,13 +89,15 @@ namespace Radish
                     _ready.Set();
                 }
             }
-            catch { return; }
+            catch
+            {
+            }
         }
 
         private void Worker()
         {
-            WaitHandle[] wait = new[] { _ready, _stop };
-            while (0 == WaitHandle.WaitAny(wait))
+            var waitHanders = new WaitHandle[] { _ready, _stop };
+            while (0 == WaitHandle.WaitAny(waitHanders))
             {
                 HttpListenerContext context;
                 lock (_queue)

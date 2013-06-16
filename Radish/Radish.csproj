@@ -59,7 +59,6 @@
     <Compile Include="IHttpHandler.cs" />
     <Compile Include="IResource.cs" />
     <Compile Include="IResponseWriter.cs" />
-    <Compile Include="EqualRequestMatcher.cs" />
     <Compile Include="HttpServer.cs" />
     <Compile Include="IHttpRequest.cs" />
     <Compile Include="IRequestExtractor.cs" />
