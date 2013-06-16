@@ -49,17 +49,13 @@
     <Compile Include="Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Adapters\HttpListenerRequestAdapter.cs" />
     <Compile Include="Adapters\HttpListenerResponseAdapter.cs" />
-    <Compile Include="ContentResponse.cs" />
     <Compile Include="RequestExtractors\QueryStringExtractor.cs" />
     <Compile Include="RequestExtractors\HttpMethodExtractor.cs" />
-    <Compile Include="Helpers\ArrayHelper.cs" />
-    <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Http.cs" />
     <Compile Include="HttpServerEngine.cs" />
     <Compile Include="IHttpContext.cs" />
     <Compile Include="IResponseWriter.cs" />
     <Compile Include="HttpServer.cs" />
-    <Compile Include="IHttpRequest.cs" />
     <Compile Include="IRequestExtractor.cs" />
     <Compile Include="Matchers\AndRequestMatcher.cs" />
     <Compile Include="Matchers\AnyRequestMatcher.cs" />
