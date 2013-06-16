@@ -25,15 +25,15 @@ namespace Radish
 
     public class HttpHandlerSetting
     {
-        protected List<HttpHandler> _settings;
+        protected List<HttpHandler> _handlers;
 
         public void Then(Action<ResponseSetting> responseAction)
         {
-            var lastSetting = _settings.Last();
-            if (lastSetting.ResponseSetting != null)
+            var lastHandler = _handlers.Last();
+            if (lastHandler.ResponseSetting != null)
                 throw new InvalidOperationException("Please set request matcher first!");
-            lastSetting.ResponseSetting = new ResponseSetting();
-            responseAction(lastSetting.ResponseSetting);
+            lastHandler.ResponseSetting = new ResponseSetting();
+            responseAction(lastHandler.ResponseSetting);
         }
     }
 
@@ -44,21 +44,21 @@ namespace Radish
         public HttpServer()
         {
             _pageNotFoundHandler = new HttpHandler { ResponseSetting = new ResponseSetting().Status(404) };
-            _settings = new List<HttpHandler>();
+            _handlers = new List<HttpHandler>();
         }
 
         public HttpHandlerSetting When(Func<RequestSetting, IRequestMatcher> requestMatcherExpression)
         {
             var handler = new HttpHandler();
             handler.RequestMatcher = requestMatcherExpression(new RequestSetting());
-            _settings.Add(handler);
+            _handlers.Add(handler);
 
             return this;
         }
 
         internal void Proccess(IHttpContext context)
         {
-            foreach (var setting in _settings)
+            foreach (var setting in _handlers)
             {
                 if (setting.Match(context.Request))
                 {

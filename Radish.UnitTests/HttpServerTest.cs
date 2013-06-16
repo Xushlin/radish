@@ -10,7 +10,7 @@ namespace Radish.UnitTests
             // Arrange
 
             // Act
-            HttpServer server = new HttpServer();
+            var server = new HttpServer();
 
             // Assert
             Assert.NotNull(server);
