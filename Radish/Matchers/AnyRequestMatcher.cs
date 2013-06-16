@@ -1,10 +1,8 @@
-﻿using System.Net;
-
-namespace Radish.Matchers
+﻿namespace Radish.Matchers
 {
-    public class AnyRequestMatcher : IRequestMatcher
+    public class AnyRequestMatcher : AbstractRequestMatcher
     {
-        public  bool Match(IHttpRequest request)
+        public override bool Match(IHttpRequest request)
         {
             return true;
         }

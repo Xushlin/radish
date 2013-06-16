@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Extractors\UriRequestExtractorTests.cs" />
     <Compile Include="Helpers\ArrayHelperTest.cs" />
+    <Compile Include="Matchers\HttpMethodRequestMatcherTests.cs" />
     <Compile Include="RequestExtractorTest.cs" />
     <Compile Include="Matchers\AndRequestMatcherTests.cs" />
     <Compile Include="Matchers\AnyRequestMatcherTests.cs" />

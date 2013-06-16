@@ -6,12 +6,16 @@ namespace Radish
 {
     public class ResponseSetting
     {
-
         private readonly List<IResponseWriter> _writers;
 
         public ResponseSetting()
         {
             _writers = new List<IResponseWriter>();
+        }
+
+        public IEnumerable<IResponseWriter> Writers
+        {
+            get { return _writers; }
         }
 
         public ResponseSetting File(string file)
@@ -26,8 +30,6 @@ namespace Radish
             return this;
         }
 
-
-
         public ResponseSetting Text(string text)
         {
             _writers.Add(new TextResponseWriter(text, Encoding.UTF8));
@@ -40,9 +42,10 @@ namespace Radish
             return this;
         }
 
-        public IEnumerable<IResponseWriter> Writers
+        public ResponseSetting Cookie(string cookieName, string cookieValue)
         {
-            get { return _writers; }
+            _writers.Add(new CookieResponseWriter(cookieName, cookieValue));
+            return this;
         }
     }
 }

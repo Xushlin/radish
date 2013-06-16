@@ -56,8 +56,6 @@
     <Compile Include="Http.cs" />
     <Compile Include="HttpServerEngine.cs" />
     <Compile Include="IHttpContext.cs" />
-    <Compile Include="IHttpHandler.cs" />
-    <Compile Include="IResource.cs" />
     <Compile Include="IResponseWriter.cs" />
     <Compile Include="HttpServer.cs" />
     <Compile Include="IHttpRequest.cs" />

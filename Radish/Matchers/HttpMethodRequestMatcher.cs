@@ -2,7 +2,7 @@
 
 namespace Radish.Matchers
 {
-    public class HttpMethodRequestMatcher : IRequestMatcher
+    public class HttpMethodRequestMatcher : AbstractRequestMatcher
     {
         private readonly string _httpMethod;
 
@@ -11,7 +11,7 @@ namespace Radish.Matchers
             _httpMethod = httpMethod;
         }
 
-        public bool Match(IHttpRequest request)
+        public override bool Match(IHttpRequest request)
         {
             return request.HttpMethod.Equals(_httpMethod, StringComparison.CurrentCultureIgnoreCase);
         }
