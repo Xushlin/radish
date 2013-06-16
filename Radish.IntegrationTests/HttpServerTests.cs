@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Radish.IntegrationTests
@@ -34,11 +35,30 @@ namespace Radish.IntegrationTests
             httpEngine.Start();
 
             // Act
+            var exception = Assert.Throws<WebException>(() => Http.Get("http://localhost:9000/home/index").GetContent());
+            httpEngine.Stop();
+
+            // Assert
+            exception.Should().NotBeNull();
+            ((HttpWebResponse)exception.Response).StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Test]
+        public void Handle_for_multi_matcher()
+        {
+            // Assert
+            var server = new HttpServer();
+            server.When(request=> request.Uri.Is("/home/index") & request.Method.Is("GET"))
+                  .Then(response => response.Text("foo"));
+
+            var httpEngine = HttpServerEngine.StartNew(server, 9000);
+
+            // Act
             var result = Http.Get("http://localhost:9000/home/index").GetContent();
             httpEngine.Stop();
 
             // Assert
-            result.Should().Be(string.Empty);
+            result.Should().Be("foo");
         }
     }
 }

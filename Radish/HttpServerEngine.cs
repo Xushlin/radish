@@ -21,6 +21,13 @@ namespace Radish
         {
         }
 
+        public static HttpServerEngine StartNew(HttpServer server, int port)
+        {
+            var engine = new HttpServerEngine(server,port);
+            engine.Start();
+            return engine;
+        }
+
         public HttpServerEngine(HttpServer setting, int port, int maxThread)
         {
             _setting = setting;
@@ -37,6 +44,7 @@ namespace Radish
         {
             IHttpContext context = new HttpListenerContextAdapter(httpListenerContext);
             _setting.Proccess(context);
+            httpListenerContext.Response.Close();
         }
 
         public HttpServerEngine Start()

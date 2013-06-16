@@ -20,8 +20,11 @@
   <MSTestThreadApartmentState>STA</MSTestThreadApartmentState>
   <BuildProcessArchitecture>x86</BuildProcessArchitecture>
   <IgnoredTests>
-    <RegexTestSelector>
-      <RegularExpression>.*</RegularExpression>
-    </RegexTestSelector>
+    <NamedTestSelector>
+      <TestName>Radish.IntegrationTests.HttpServerTests.Handle_when_matched_request_should_reponse_setting_content</TestName>
+    </NamedTestSelector>
+    <NamedTestSelector>
+      <TestName>Radish.IntegrationTests.HttpServerTests.Handle_when_request_not_matched_should_return_404</TestName>
+    </NamedTestSelector>
   </IgnoredTests>
 </ProjectConfiguration>

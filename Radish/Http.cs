@@ -9,7 +9,8 @@ namespace Radish
         public static ResponseResult Get(string url)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
-            return ResponseResult.Text((HttpWebResponse)request.GetResponse());
+            var response = (HttpWebResponse) request.GetResponse();
+            return ResponseResult.Text(response);
         }
 
         public static object Put(string url, string data)
