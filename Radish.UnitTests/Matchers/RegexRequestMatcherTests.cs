@@ -1,20 +1,21 @@
-﻿using FluentAssertions;
+﻿
+using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
 using Radish.Matchers;
 
 namespace Radish.UnitTests.Matchers
 {
-    public class EqualRequestMatcherTests
+    public class RegexRequestMatcherTests
     {
         [Test]
-        public void Match_for_are_equal()
+        public void Match_when_regex_is_matched_should_return_true()
         {
             // Arrange
             var extractor = Substitute.For<IRequestExtractor>();
             var request = Substitute.For<IHttpRequest>();
             extractor.Extract(request).ReturnsForAnyArgs("/home/index");
-            var matcher = new EqualRequestMatcher(extractor, "/home/index");
+            var matcher = new RegexRequestMatcher(extractor, "^/home/");
 
             // Act
             var result = matcher.Match(request);
@@ -24,14 +25,13 @@ namespace Radish.UnitTests.Matchers
         }
 
         [Test]
-        public void IsMatch_for_uri()
+        public void Match_when_regex_is_not_matched_should_return_false()
         {
             // Arrange
             var extractor = Substitute.For<IRequestExtractor>();
-            var matcher = new EqualRequestMatcher(extractor, "/home/index");
             var request = Substitute.For<IHttpRequest>();
-
-            extractor.Extract(request).ReturnsForAnyArgs("invalid");
+            extractor.Extract(request).ReturnsForAnyArgs("/home/index");
+            var matcher = new RegexRequestMatcher(extractor, "^/invlid/");
 
             // Act
             var result = matcher.Match(request);

@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using Radish.Matchers;
 
@@ -22,7 +23,7 @@ namespace Radish.UnitTests.Matchers
             var result = andRequestMatcher.Match(null);
 
             // Assert
-            Assert.True(result);
+            result.Should().BeTrue();
         }
 
 
@@ -42,7 +43,7 @@ namespace Radish.UnitTests.Matchers
             var result = andRequestMatcher.Match(null);
 
             // Assert
-            Assert.False(result);
+            result.Should().BeFalse();
         }
     }
 }

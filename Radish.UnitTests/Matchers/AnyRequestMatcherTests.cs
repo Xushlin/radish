@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Radish.Matchers;
 
 namespace Radish.UnitTests.Matchers
@@ -15,7 +16,7 @@ namespace Radish.UnitTests.Matchers
             var result = matcher.Match(null);
 
             // Assert
-            Assert.True(result);
+            result.Should().BeTrue();
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Adapters\HttpListenerContextAdapter.cs" />
     <Compile Include="Adapters\HttpListenerRequestAdapter.cs" />
     <Compile Include="Adapters\HttpListenerResponseAdapter.cs" />
+    <Compile Include="Matchers\RegexRequestMatcher.cs" />
     <Compile Include="RequestExtractors\QueryStringExtractor.cs" />
     <Compile Include="RequestExtractors\HttpMethodExtractor.cs" />
     <Compile Include="Http.cs" />
