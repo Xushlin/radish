@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Radish.Matchers
 {
-    public class RegexRequestMatcher : AbstractRequestMatcher
+    public class RegexRequestMatcher : RequestMatcher
     {
         private readonly IRequestExtractor _extractor;
         private readonly Regex _regex;

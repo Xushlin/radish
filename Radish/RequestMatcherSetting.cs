@@ -6,7 +6,7 @@ namespace Radish
     {
         protected IRequestExtractor extractor;
 
-        public AbstractRequestMatcher Is(string expected)
+        public RequestMatcher Is(string expected)
         {
             return new EqualRequestMatcher(extractor, expected);
         }

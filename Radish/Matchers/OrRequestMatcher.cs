@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Radish.Matchers
 {
-    public class OrRequestMatcher : AbstractRequestMatcher
+    public class OrRequestMatcher : RequestMatcher
     {
         private readonly IEnumerable<IRequestMatcher> _matchers;
 

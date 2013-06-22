@@ -1,6 +1,6 @@
 ﻿namespace Radish.Matchers
 {
-    public class AnyRequestMatcher : AbstractRequestMatcher
+    public class AnyRequestMatcher : RequestMatcher
     {
         public override bool Match(IHttpRequest request)
         {

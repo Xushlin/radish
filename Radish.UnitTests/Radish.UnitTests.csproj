@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Matchers\RequestMatcherTests.cs" />
     <Compile Include="Matchers\RegexRequestMatcherTests.cs" />
     <Compile Include="RequestExtractors\HttpMethodExtractorTests.cs" />
     <Compile Include="RequestExtractors\QueryStringExtractorTests.cs" />

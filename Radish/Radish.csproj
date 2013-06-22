@@ -64,6 +64,7 @@
     <Compile Include="Matchers\ExpressionRequestMatcher.cs" />
     <Compile Include="Matchers\OrRequestMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestMatcher.cs" />
     <Compile Include="RequestMatcherSetting.cs" />
     <Compile Include="RequestSetting.cs" />
     <Compile Include="RequestExtractors\UriExtractor.cs" />

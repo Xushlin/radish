@@ -45,11 +45,29 @@ namespace Radish.IntegrationTests
         }
 
         [Test]
-        public void Handle_for_multi_matcher()
+        public void Handle_for_multi_matcher_with_and()
         {
             // Assert
             var server = new HttpServer();
-            server.When(request=> request.Uri.Is("/home/index") & request.Method.Is("GET"))
+            server.When(request => request.Uri.Is("/home/index") & request.Method.Is("GET"))
+                  .Then(response => response.Text("foo"));
+
+            var httpEngine = HttpServerEngine.StartNew(server, 9000);
+
+            // Act
+            var result = Http.Get("http://localhost:9000/home/index").GetContent();
+            httpEngine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
+        }
+
+        [Test]
+        public void Handle_for_multi_matcher_with_or()
+        {
+            // Assert
+            var server = new HttpServer();
+            server.When(request => request.Uri.Is("/home/index") | request.Method.Is("GET"))
                   .Then(response => response.Text("foo"));
 
             var httpEngine = HttpServerEngine.StartNew(server, 9000);
