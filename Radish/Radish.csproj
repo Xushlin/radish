@@ -52,7 +52,7 @@
     <Compile Include="Matchers\RegexRequestMatcher.cs" />
     <Compile Include="RequestExtractors\QueryStringExtractor.cs" />
     <Compile Include="RequestExtractors\HttpMethodExtractor.cs" />
-    <Compile Include="Http.cs" />
+    <Compile Include="Helpers\Http.cs" />
     <Compile Include="HttpServerEngine.cs" />
     <Compile Include="IHttpContext.cs" />
     <Compile Include="IResponseWriter.cs" />
