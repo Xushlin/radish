@@ -2,7 +2,7 @@
 
 namespace Radish.Matchers
 {
-    public class ExpressionRequestMatcher : RequestMatcher
+    internal class ExpressionRequestMatcher : RequestMatcher
     {
         private readonly Func<IHttpRequest, bool> _expression;
 

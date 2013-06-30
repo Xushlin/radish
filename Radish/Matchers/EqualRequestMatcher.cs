@@ -1,6 +1,6 @@
 namespace Radish.Matchers
 {
-    public class EqualRequestMatcher : RequestMatcher
+    internal class EqualRequestMatcher : RequestMatcher
     {
         private readonly IRequestExtractor _extractor;
         private readonly string _expected;

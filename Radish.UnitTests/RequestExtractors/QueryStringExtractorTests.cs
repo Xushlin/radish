@@ -15,7 +15,7 @@ namespace Radish.UnitTests.RequestExtractors
             var request = Substitute.For<IHttpRequest>();
             request.QueryString.Returns(new NameValueCollection() { { "name", "value" } });
             var extractor = new QueryStringExtractor("name");
-
+             
             // Act
             var result = extractor.Extract(request);
 

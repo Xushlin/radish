@@ -50,17 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Matchers\RequestMatcherTests.cs" />
-    <Compile Include="Matchers\RegexRequestMatcherTests.cs" />
     <Compile Include="RequestExtractors\HttpMethodExtractorTests.cs" />
     <Compile Include="RequestExtractors\QueryStringExtractorTests.cs" />
     <Compile Include="RequestExtractors\UriExtractorTests.cs" />
     <Compile Include="RequestExtractorTest.cs" />
-    <Compile Include="Matchers\AndRequestMatcherTests.cs" />
-    <Compile Include="Matchers\AnyRequestMatcherTests.cs" />
-    <Compile Include="Matchers\ExpressionRequestMatcherTests.cs" />
-    <Compile Include="Matchers\OrRequestMatcherTests.cs" />
-    <Compile Include="Matchers\EqualRequestMatcherTests.cs" />
     <Compile Include="HttpServerTest.cs" />
     <Compile Include="HttpTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

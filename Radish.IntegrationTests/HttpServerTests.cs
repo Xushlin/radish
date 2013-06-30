@@ -12,8 +12,8 @@ namespace Radish.IntegrationTests
         {
             // Assert
             var httpServer = new HttpServer();
-            httpServer.When(request => request.Uri.Is("/home/index"))
-                      .Then(response => response.Text("hello"));
+            httpServer.Request(request => request.Uri.Is("/home/index"))
+                      .Response(response => response.Text("hello"));
 
             var httpEngine = new HttpServerEngine(httpServer, 9000);
             httpEngine.Start();
@@ -49,8 +49,8 @@ namespace Radish.IntegrationTests
         {
             // Assert
             var server = new HttpServer();
-            server.When(request => request.Uri.Is("/home/index") & request.Method.Is("GET"))
-                  .Then(response => response.Text("foo"));
+            server.Request(request => request.Uri.Is("/home/index") & request.Method.Is("GET"))
+                  .Response(response => response.Text("foo"));
 
             var httpEngine = HttpServerEngine.StartNew(server, 9000);
 
@@ -67,8 +67,8 @@ namespace Radish.IntegrationTests
         {
             // Assert
             var server = new HttpServer();
-            server.When(request => request.Uri.Is("/home/index") | request.Method.Is("GET"))
-                  .Then(response => response.Text("foo"));
+            server.Request(request => request.Uri.Is("/home/index") | request.Method.Is("GET"))
+                  .Response(response => response.Text("foo"));
 
             var httpEngine = HttpServerEngine.StartNew(server, 9000);
 

@@ -21,5 +21,14 @@ namespace Radish
                 return this;
             }
         }
+
+        public RequestMatcherSetting Content
+        {
+            get
+            {
+                extractor = new ContentExtractor();
+                return this;
+            }
+        }
     }
 }

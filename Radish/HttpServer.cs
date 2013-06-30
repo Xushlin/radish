@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Radish.Matchers;
 
 namespace Radish
 {
@@ -23,21 +24,25 @@ namespace Radish
         }
     }
 
-    public class HttpHandlerSetting
+    public class ServerResponseSetting
     {
         protected List<HttpHandler> handlers;
 
-        public void Then(Action<ResponseSetting> responseAction)
+        public void Response(Action<ResponseSetting> responseAction)
         {
-            var lastHandler = handlers.Last();
-            if (lastHandler.ResponseSetting != null)
-                throw new InvalidOperationException("Please set request matcher first!");
+            var lastHandler = handlers.LastOrDefault();
+            if (lastHandler == null || lastHandler.ResponseSetting != null)
+            {
+                var handler = new HttpHandler { RequestMatcher = new AnyRequestMatcher() };
+                handlers.Add(handler);
+                lastHandler = handler;
+            }
             lastHandler.ResponseSetting = new ResponseSetting();
             responseAction(lastHandler.ResponseSetting);
         }
     }
 
-    public class HttpServer : HttpHandlerSetting
+    public class HttpServer : ServerResponseSetting
     {
         private readonly HttpHandler _pageNotFoundHandler;
 
@@ -47,7 +52,7 @@ namespace Radish
             handlers = new List<HttpHandler>();
         }
 
-        public HttpHandlerSetting When(Func<RequestSetting, IRequestMatcher> requestMatcherExpression)
+        public ServerResponseSetting Request(Func<RequestSetting, IRequestMatcher> requestMatcherExpression)
         {
             var handler = new HttpHandler { RequestMatcher = requestMatcherExpression(new RequestSetting()) };
             handlers.Add(handler);

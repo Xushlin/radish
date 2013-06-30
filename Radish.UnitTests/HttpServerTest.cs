@@ -1,37 +1,59 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 using Radish.Helpers;
 
 namespace Radish.UnitTests
 {
-    public class HttpServerTest
+    public class HttpServerTests
     {
-        [Test]
-        public void Create()
-        {
-            // Arrange
-
-            // Act
-            var server = new HttpServer();
-
-            // Assert
-            Assert.NotNull(server);
-        }
+        const int port = 9000;
 
         [Test]
-        public void Run()
+        public void should_return_expected_response_text()
         {
             // Arrange
             var server = new HttpServer();
-            server.When(request => request.Uri.Is("/home/index"))
-                  .Then(response => response.Text("foo"));
-            var engine = new HttpServerEngine(server,9000).Start();
+            server.Response(response => response.Text("test"));
+            var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000/home/index").GetContent();
+            var result = Http.Get("http://localhost:9000").GetContent();
             engine.Stop();
 
             // Assert
-            Assert.That(result, Is.EqualTo("foo"));
+            result.Should().Be("test");
+        }
+
+        [Test]
+        public void should_return_expected_response_from_file()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Response(response => response.File("test.txt"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Get("http://localhost:9000").GetContent();
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("hello");
+        }
+
+        [Test]
+        public void should_match_request_based_on_either_matcher() {
+            // Arrange
+            var server = new HttpServer();
+            server.Request(request => request.Uri.Is("/home") & request.Content.Is("content"))
+                  .Response(response => response.Text("foo"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Post("http://localhost:9000/home","content");
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
         }
     }
 }
