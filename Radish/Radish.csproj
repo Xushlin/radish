@@ -62,7 +62,6 @@
     <Compile Include="Matchers\AndRequestMatcher.cs" />
     <Compile Include="Matchers\AnyRequestMatcher.cs" />
     <Compile Include="Matchers\EqualRequestMatcher.cs" />
-    <Compile Include="Matchers\ExpressionRequestMatcher.cs" />
     <Compile Include="Matchers\OrRequestMatcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestMatcher.cs" />

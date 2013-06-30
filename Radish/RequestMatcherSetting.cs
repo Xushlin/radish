@@ -10,5 +10,10 @@ namespace Radish
         {
             return new EqualRequestMatcher(extractor, expected);
         }
+
+        public RequestMatcher Match(string regexExpression)
+        {
+            return new RegexRequestMatcher(extractor, regexExpression);
+        }
     }
 }

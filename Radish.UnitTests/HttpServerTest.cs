@@ -17,7 +17,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000").GetContent();
+            var result = Http.Get("http://localhost:9000");
             engine.Stop();
 
             // Assert
@@ -33,11 +33,62 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000").GetContent();
+            var result = Http.Get("http://localhost:9000");
             engine.Stop();
 
             // Assert
             result.Should().Be("hello");
+        }
+
+        [Test]
+        public void should_match_request_based_on_specified_uri()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Request(request => request.Uri.Is("/home"))
+                  .Response(response => response.Text("foo"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Get("http://localhost:9000/home");
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
+        }
+
+        [Test]
+        public void should_match_request_based_on_specified_content()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Request(request => request.Content.Is("content"))
+                  .Response(response => response.Text("foo"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Post("http://localhost:9000","content");
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
+        }
+
+        [Test]
+        public void should_match_request_based_on_specified_regex()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Request(request => request.Uri.Match("^/home"))
+                  .Response(response => response.Text("foo"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Post("http://localhost:9000/home123", "content");
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
         }
 
         [Test]
