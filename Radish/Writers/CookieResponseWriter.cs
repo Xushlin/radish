@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Radish.Writers
 {
-    public class CookieResponseWriter : IResponseWriter
+    internal class CookieResponseWriter : IResponseWriter
     {
         private readonly string _name;
         private readonly string _value;

@@ -88,6 +88,23 @@ namespace Radish.UnitTests
         }
 
         [Test]
+        public void should_match_request_based_on_specified_http_method()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Request(request => request.Method.Is("GET"))
+                  .Response(response => response.Text("foo"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Get("http://localhost:9000");
+            engine.Stop();
+
+            // Assert
+            result.Should().Be("foo");
+        }
+
+        [Test]
         public void should_match_request_based_on_specified_regex()
         {
             // Arrange

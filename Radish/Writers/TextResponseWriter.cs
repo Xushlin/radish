@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Radish.Writers
 {
-    public class TextResponseWriter : IResponseWriter
+    internal class TextResponseWriter : IResponseWriter
     {
         private readonly string _text;
         private readonly Encoding _encoding;

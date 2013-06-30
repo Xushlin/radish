@@ -2,7 +2,7 @@ using System;
 
 namespace Radish.Writers
 {
-    public class HeaderResponseWriter : IResponseWriter
+    internal class HeaderResponseWriter : IResponseWriter
     {
         private readonly string _name;
         private readonly string _value;

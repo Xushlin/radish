@@ -15,15 +15,5 @@ namespace Radish
         {
             return new OrRequestMatcher(matcher1, matcher2);
         }
-
-        public static IRequestMatcher And(params IRequestMatcher[] matchers)
-        {
-            return new AndRequestMatcher(matchers);
-        }
-
-        public static IRequestMatcher Or(params IRequestMatcher[] matchers)
-        {
-            return new OrRequestMatcher(matchers);
-        }
     }
 }

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Radish.Writers
 {
-    public class FileResponseWriter : IResponseWriter
+    internal class FileResponseWriter : IResponseWriter
     {
         private readonly string _file;
 

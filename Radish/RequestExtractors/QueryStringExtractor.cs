@@ -1,6 +1,6 @@
 namespace Radish.RequestExtractors
 {
-    public class QueryStringExtractor : IRequestExtractor
+    internal class QueryStringExtractor : IRequestExtractor
     {
         private readonly string _paramName;
 

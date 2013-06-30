@@ -1,6 +1,6 @@
 namespace Radish.RequestExtractors
 {
-    public class UriExtractor : IRequestExtractor
+    internal class UriExtractor : IRequestExtractor
     {
         public string Extract(IHttpRequest request)
         {
