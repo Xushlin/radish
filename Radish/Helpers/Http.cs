@@ -71,33 +71,26 @@ namespace Radish.Helpers
             HttpWebResponse response;
             var request = (HttpWebRequest)WebRequest.Create(url);
             string result = null;
-            try
-            {
 
-                var arr = Encoding.UTF8.GetBytes(postData);
 
-                request.Timeout = 10000;
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = arr.Length;
-                request.ProtocolVersion = HttpVersion.Version11;
-                Stream dataStream = request.GetRequestStream();
-                dataStream.Write(arr, 0, arr.Length);
-                dataStream.Close();
-                response = (HttpWebResponse)request.GetResponse();
+            var arr = Encoding.UTF8.GetBytes(postData);
 
-            }
-            catch (WebException exc)
-            {
-                response = (HttpWebResponse)exc.Response;
-            }
-            if (response != null)
-            {
-                // we will read data via the response stream
-                var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
-                var streamReader = new StreamReader(response.GetResponseStream(), encoding);
-                result = streamReader.ReadToEnd();
-            }
+            request.Timeout = 10000;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = arr.Length;
+            request.ProtocolVersion = HttpVersion.Version11;
+            Stream dataStream = request.GetRequestStream();
+            dataStream.Write(arr, 0, arr.Length);
+            dataStream.Close();
+            response = (HttpWebResponse)request.GetResponse();
+
+
+            // we will read data via the response stream
+            var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
+            var streamReader = new StreamReader(response.GetResponseStream(), encoding);
+            result = streamReader.ReadToEnd();
+
 
 
             return result;
