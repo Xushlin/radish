@@ -11,21 +11,14 @@ namespace Radish.Helpers
             HttpWebResponse response;
             var request = (HttpWebRequest)WebRequest.Create(url);
             string result = null;
-            try
-            {
-                response = request.GetResponse() as HttpWebResponse;
-            }
-            catch (WebException exc)
-            {
-                response = (HttpWebResponse)exc.Response;
-            }
-            if (response != null)
-            {
-                // we will read data via the response stream
-                var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
-                var streamReader = new StreamReader(response.GetResponseStream(), encoding);
-                result = streamReader.ReadToEnd();
-            }
+
+            response = request.GetResponse() as HttpWebResponse;
+
+            // we will read data via the response stream
+            var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
+            var streamReader = new StreamReader(response.GetResponseStream(), encoding);
+            result = streamReader.ReadToEnd();
+
 
 
             return result;

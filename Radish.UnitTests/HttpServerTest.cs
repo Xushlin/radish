@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Net;
+using FluentAssertions;
 using NUnit.Framework;
 using Radish.Helpers;
 
@@ -7,6 +8,22 @@ namespace Radish.UnitTests
     public class HttpServerTests
     {
         const int port = 9000;
+
+        [Test]
+        public void when_not_matched_should_return_not_found()
+        {
+            // Arrange
+            var server = new HttpServer();
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var exception = Assert.Throws<WebException>(() => Http.Get("http://localhost:9000"));
+            var response = exception.Response as HttpWebResponse;
+            engine.Stop();
+
+            // Assert
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
 
         [Test]
         public void should_return_expected_response_text()
@@ -67,7 +84,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Post("http://localhost:9000","content");
+            var result = Http.Post("http://localhost:9000", "content");
             engine.Stop();
 
             // Assert
@@ -92,7 +109,8 @@ namespace Radish.UnitTests
         }
 
         [Test]
-        public void should_match_request_based_on_either_matcher() {
+        public void should_match_request_based_on_either_matcher()
+        {
             // Arrange
             var server = new HttpServer();
             server.Request(request => request.Uri.Is("/home") & request.Content.Is("content"))
@@ -100,7 +118,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Post("http://localhost:9000/home","content");
+            var result = Http.Post("http://localhost:9000/home", "content");
             engine.Stop();
 
             // Assert
