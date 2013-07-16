@@ -165,6 +165,7 @@ namespace Radish.UnitTests
             // Act
             var result1 = Http.Post("http://localhost:9000", "content");
             var result2 = Http.Get("http://localhost:9000/home");
+
             engine.Stop();
 
             // Assert

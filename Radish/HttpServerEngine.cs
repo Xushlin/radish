@@ -23,7 +23,7 @@ namespace Radish
 
         public static HttpServerEngine StartNew(HttpServer server, int port)
         {
-            var engine = new HttpServerEngine(server,port);
+            var engine = new HttpServerEngine(server, port);
             engine.Start();
             return engine;
         }
@@ -97,9 +97,7 @@ namespace Radish
                     _ready.Set();
                 }
             }
-            catch
-            {
-            }
+            catch{}
         }
 
         private void Worker()
