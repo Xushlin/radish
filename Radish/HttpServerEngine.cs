@@ -40,11 +40,11 @@ namespace Radish
             _listenerThread = new Thread(HandleRequests);
         }
 
-        void ProcessRequest(HttpListenerContext httpListenerContext)
+        void ProcessRequest(HttpListenerContext contenxt)
         {
-            IHttpContext context = new HttpListenerContextAdapter(httpListenerContext);
+            IHttpContext context = new HttpListenerContextAdapter(contenxt);
             _setting.Proccess(context);
-            httpListenerContext.Response.Close();
+            contenxt.Response.Close();
         }
 
         public HttpServerEngine Start()
@@ -97,7 +97,9 @@ namespace Radish
                     _ready.Set();
                 }
             }
-            catch{}
+            catch
+            {
+            }
         }
 
         private void Worker()

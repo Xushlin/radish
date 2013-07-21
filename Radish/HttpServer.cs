@@ -67,7 +67,6 @@ namespace Radish
                 if (handler.Match(context.Request))
                 {
                     handler.Handle(context);
-                    context.Response.OutputStream.Close();
                     return;
                 }
             }

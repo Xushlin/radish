@@ -72,6 +72,7 @@
     <Compile Include="Writers\HeaderResponseWriter.cs" />
     <Compile Include="Writers\FileResponseWriter.cs" />
     <Compile Include="ResponseSetting.cs" />
+    <Compile Include="Writers\RedirectUrlWriter.cs" />
     <Compile Include="Writers\StatusCodeResponseWriter.cs" />
     <Compile Include="Writers\TextResponseWriter.cs" />
   </ItemGroup>

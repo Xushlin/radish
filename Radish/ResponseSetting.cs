@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using Radish.Writers;
 
@@ -46,6 +47,11 @@ namespace Radish
         {
             _writers.Add(new CookieResponseWriter(cookieName, cookieValue));
             return this;
+        }
+
+        public void Redirect(string redirectUrl)
+        {
+            _writers.Add(new RedirectUrlWriter(redirectUrl));
         }
     }
 }

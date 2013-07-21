@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -6,23 +8,21 @@ namespace Radish.Helpers
 {
     public class Http
     {
-        public static string Get(string url)
+        public static HttpResult Get(string url)
         {
             HttpWebResponse response;
             var request = (HttpWebRequest)WebRequest.Create(url);
-            string result = null;
+            request.AllowAutoRedirect = false;
+            try
+            {
+                response = request.GetResponse() as HttpWebResponse;
+            }
+            catch (WebException exc)
+            {
+                response = exc.Response as HttpWebResponse;
+            }
 
-            response = request.GetResponse() as HttpWebResponse;
-
-            // we will read data via the response stream
-            var encoding = string.IsNullOrEmpty(response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(response.ContentEncoding);
-            var streamReader = new StreamReader(response.GetResponseStream(), encoding);
-            result = streamReader.ReadToEnd();
-
-
-
-            return result;
-
+            return new HttpResult(response);
         }
 
         // TODO: add unit tests for put and post methods
@@ -95,6 +95,63 @@ namespace Radish.Helpers
 
             return result;
         }
+
+    }
+
+    public class HttpResult
+    {
+        private readonly HttpWebResponse _response;
+        private readonly byte[] _content;
+        public HttpStatusCode StatusCode { get { return _response.StatusCode; } }
+        public string RedirectUrl { get { return _response.Headers["Location"]; } }
+        public string Content
+        {
+            get
+            {
+                var encoding = string.IsNullOrEmpty(_response.ContentEncoding) ? Encoding.UTF8 : Encoding.GetEncoding(_response.ContentEncoding);
+
+                using (var reader = new StreamReader(new MemoryStream(_content), encoding))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+        public HttpResult(HttpWebResponse response)
+        {
+            _response = response;
+
+            if (response.StatusCode == HttpStatusCode.Redirect)
+            {
+
+            }
+
+            if (_response.ContentLength > 0)
+            {
+                _content = new byte[_response.ContentLength];
+                Stream stream = _response.GetResponseStream();
+                int index = 0;
+                while (index < _content.Length)
+                {
+                    _content[index] = (byte)stream.ReadByte();
+                    index++;
+                }
+            }
+            else
+            {
+                Stream stream = _response.GetResponseStream();
+                List<byte> buffer = new List<byte>();
+                int data = stream.ReadByte();
+                while (data > -1)
+                {
+                    buffer.Add((byte)data);
+                    data = stream.ReadByte();
+                }
+                _content = buffer.ToArray();
+            }
+
+        }
+
 
     }
 }

@@ -17,8 +17,28 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            Assert.Throws<WebException>(() => Http.Get("http://localhost:9000"));
+            var result = Http.Get("http://localhost:9000");
             engine.Stop();
+
+            // Assert
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Test]
+        public void should_return_expected_redirect()
+        {
+            // Arrange
+            var server = new HttpServer();
+            server.Response(response=> response.Redirect("http://www.google.com"));
+            var engine = HttpServerEngine.StartNew(server, port);
+
+            // Act
+            var result = Http.Get("http://localhost:9000");
+            engine.Stop();
+
+            // Assert
+            result.StatusCode.Should().Be(HttpStatusCode.Redirect);
+            result.RedirectUrl.Should().Be("http://www.google.com");
         }
 
         [Test]
@@ -34,7 +54,7 @@ namespace Radish.UnitTests
             engine.Stop();
 
             // Assert
-            result.Should().Be("test");
+            result.Content.Should().Be("test");
         }
 
         [Test]
@@ -46,7 +66,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000");
+            var result = Http.Get("http://localhost:9000").Content;
             engine.Stop();
 
             // Assert
@@ -63,7 +83,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000/home");
+            var result = Http.Get("http://localhost:9000/home").Content;
             engine.Stop();
 
             // Assert
@@ -97,7 +117,7 @@ namespace Radish.UnitTests
             var engine = HttpServerEngine.StartNew(server, port);
 
             // Act
-            var result = Http.Get("http://localhost:9000");
+            var result = Http.Get("http://localhost:9000").Content;
             engine.Stop();
 
             // Assert
@@ -164,7 +184,7 @@ namespace Radish.UnitTests
 
             // Act
             var result1 = Http.Post("http://localhost:9000", "content");
-            var result2 = Http.Get("http://localhost:9000/home");
+            var result2 = Http.Get("http://localhost:9000/home").Content;
 
             engine.Stop();
 
